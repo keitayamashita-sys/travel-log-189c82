@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Travel Log</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;600;700&family=Sacramento&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     ▼▼▼ ここを編集すれば内容が変わります ▼▼▼
+     ============================================================ -->
+<script>
+  // 拠点（日本）
+  const HOME = {
+    nameJa: "日本",
+    nameEn: "Japan",
+    flag: "jp",
+    base: "Tokyo",
+    memo: "すべての旅は、ここから始まる。"
+  };
+
+  // 訪問先（国 → 都市の階層構造、古い→新しい順）
+  // distance: 東京からの片道距離(km)
+  const TRIPS = [
+    {
+      id: "malaysia",
+      nameJa: "マレーシア", nameEn: "Malaysia",
+      flag: "my",
+      period: "Feb 2024",
+      cities: [
+        {
+          id: "langkawi",
+          nameJa: "ランカウイ", nameEn: "Langkawi",
+          photo: "langkawi-900.jpg",
+          period: "Feb 21 – 24, 2024",
+          days: "4 days",
+          purpose: "ビーチリゾート",
+          distance: 5270,
+          attractions: "Eagle Square, Langkawi Cable Car, Sky Bridge, Pantai Cenang, Underwater World",
+          marqueePhoto: "albums/langkawi/IMG_8017.jpg",
+          album: [
+            "albums/langkawi/IMG_61B3.jpg",
+            "albums/langkawi/IMG_647F.jpg",
+            "albums/langkawi/IMG_7942.jpg",
+            "albums/langkawi/IMG_7960.jpg",
+            "albums/langkawi/IMG_7976.jpg",
+            "albums/langkawi/IMG_8017.jpg",
+            "albums/langkawi/IMG_8277.jpg",
+            "albums/langkawi/IMG_84E5.jpg",
+            "albums/langkawi/IMG_9127.jpg",
+            "albums/langkawi/IMG_9131.jpg",
+            "albums/langkawi/IMG_9139.jpg",
+            "albums/langkawi/IMG_AF75.jpg",
+            "albums/langkawi/IMG_EA91.jpg",
+            "albums/langkawi/clip1.mp4",
+            "albums/langkawi/clip2.mp4",
+            "albums/langkawi/clip3.mp4",
+            "albums/langkawi/clip4.mp4"
+          ]
+        },
+        {
+          id: "kl",
+          nameJa: "クアラルンプール", nameEn: "Kuala Lumpur",
+          photo: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=900",
+          period: "Feb 21 – 28, 2024",
+          days: "8 days",
+          purpose: "観光",
+          distance: 5379,
+          attractions: "Petronas Twin Towers, Batu Caves, KL Tower, Merdeka Square, Bukit Bintang",
+          marqueePhoto: "albums/kl/IMG_9412.jpg",
+          album: [
+            "albums/kl/11308903-5108-4FFD-8810-871904DE8121.jpg",
+            "albums/kl/16A1AC7E-C94C-4543-971B-180599669ACE.jpg",
+            "albums/kl/41A8C106-5E24-4A28-A186-A3D88C13EDD5.jpg",
+            "albums/kl/7BB61390-9AE1-4E57-AFA4-2568858A8D71.jpg",
+            "albums/kl/84E0795F-A2FF-4732-83B4-57BF41AC3952.jpg",
+            "albums/kl/8A2DB327-882A-40E0-AADA-AE192C940E28.jpg",
+            "albums/kl/A168D4F9-6C18-446C-9F22-AB753E409F78.jpg",
+            "albums/kl/D6819F10-319E-4E9C-A17A-1CDE9E5D50F2.jpg",
+            "albums/kl/IMG_9412.jpg",
+            "albums/kl/IMG_9571.jpg",
+            "albums/kl/IMG_9705.mov",
+            "albums/kl/IMG_9708.jpg",
+            "albums/kl/IMG_9737.jpg",
+            "albums/kl/IMG_9754.jpg",
+            "albums/kl/IMG_9764.jpg",
+            "albums/kl/IMG_9765.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      id: "thailand",
+      nameJa: "タイ", nameEn: "Thailand",
+      flag: "th",
+      period: "Feb 2024",
+      cities: [
+        {
+          id: "lipe",
+          nameJa: "リペ島", nameEn: "Koh Lipe",
+          photo: "lipe-900.jpg",
+          period: "Feb 22 – 23, 2024",
+          days: "2 days",
+          purpose: "ビーチリゾート・シュノーケリング",
+          distance: 5298,
+          attractions: "Pattaya Beach, Sunrise Beach, Sunset Beach, Walking Street, Koh Adang Viewpoint",
+          album: [
+            "albums/lipe/IMG_8117.jpg",
+            "albums/lipe/IMG_8123.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      id: "taiwan",
+      nameJa: "台湾", nameEn: "Taiwan",
+      flag: "tw",
+      period: "Apr 2024",
+      cities: [
+        {
+          id: "taipei",
+          nameJa: "台北", nameEn: "Taipei",
+          photo: "pexels-timo-volz-837240-1717859-900.jpg",
+          period: "Apr 1 – 3, 2024",
+          days: "3 days",
+          purpose: "観光・グルメ",
+          distance: 2159,
+          attractions: "Taipei 101, Shilin Night Market, Chiang Kai-shek Memorial Hall, National Palace Museum, Jiufen Old Street",
+          marqueePhoto: "albums/taipei/IMG_0731.jpg",
+          album: [
+            "albums/taipei/IMG_0695.jpg",
+            "albums/taipei/IMG_0711.mov",
+            "albums/taipei/IMG_0715.jpg",
+            "albums/taipei/IMG_0721.mov",
+            "albums/taipei/IMG_0727.mov",
+            "albums/taipei/IMG_0731.jpg",
+            "albums/taipei/IMG_0732.mov",
+            "albums/taipei/IMG_0733.jpg",
+            "albums/taipei/IMG_0737.jpg",
+            "albums/taipei/IMG_0740.mov",
+            "albums/taipei/IMG_0744.mov",
+            "albums/taipei/IMG_0750.jpg",
+            "albums/taipei/IMG_0752.jpg",
+            "albums/taipei/IMG_0755.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      id: "australia",
+      nameJa: "オーストラリア", nameEn: "Australia",
+      flag: "au",
+      period: "May 2024",
+      cities: [
+        {
+          id: "perth",
+          nameJa: "パース", nameEn: "Perth",
+          photo: "pexels-horace-young-1063288334-20777136-900.jpg",
+          period: "May 14 – 19, 2024",
+          days: "6 days",
+          purpose: "観光・自然",
+          distance: 7953,
+          attractions: "Rottnest Island, Kings Park, Fremantle Markets, Cottesloe Beach, Swan River",
+          album: [
+            "albums/perth/0A95C8F6-770F-413A-9085-AB0D4A534298.jpg",
+            "albums/perth/29DE4ABF-FD96-4592-A29A-F6DE83341586.jpg",
+            "albums/perth/54CDCA9E-B710-476F-B41A-7EB518E2572F.jpg",
+            "albums/perth/66B2FAC4-6212-4817-ABE3-50D771BA081A.jpg",
+            "albums/perth/BC583247-58BE-4192-BCE8-4D1FD6371D25.jpg",
+            "albums/perth/IMG_1077.jpg",
+            "albums/perth/IMG_1090.jpg",
+            "albums/perth/IMG_1102.mov",
+            "albums/perth/IMG_1115.mov",
+            "albums/perth/IMG_1121.mov",
+            "albums/perth/IMG_1198.jpg",
+            "albums/perth/IMG_1252.jpg",
+            "albums/perth/IMG_1348.jpg",
+            "albums/perth/IMG_1355.jpg",
+            "albums/perth/IMG_1531.jpg",
+            "albums/perth/IMG_1550.jpg",
+            "albums/perth/IMG_2071.jpg",
+            "albums/perth/IMG_2084.jpg",
+            "albums/perth/IMG_2189.jpg",
+            "albums/perth/IMG_2236.jpg",
+            "albums/perth/IMG_2248.jpg",
+            "albums/perth/IMG_2256.jpg",
+            "albums/perth/IMG_2287.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      id: "singapore",
+      nameJa: "シンガポール", nameEn: "Singapore",
+      flag: "sg",
+      period: "May 2024",
+      cities: [
+        {
+          id: "marinabay",
+          nameJa: "マリーナ・ベイ", nameEn: "Marina Bay",
+          photo: "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=900",
+          period: "May 19 – 20, 2024",
+          days: "2 days",
+          purpose: "観光",
+          distance: 5374,
+          attractions: "Marina Bay Sands, Gardens by the Bay, Merlion Park, Singapore Flyer, ArtScience Museum",
+          marqueePhoto: "albums/marinabay/IMG_1773.jpg",
+          album: [
+            "albums/marinabay/IMG_1773.jpg",
+            "albums/marinabay/IMG_1806.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      id: "macao",
+      nameJa: "マカオ", nameEn: "Macao",
+      flag: "mo",
+      period: "May 2024",
+      cities: [
+        {
+          id: "taipa",
+          nameJa: "タイパ島", nameEn: "Taipa",
+          photo: "pexels-jeffrey-lau-770172754-28939970-900.jpg",
+          period: "May 29 – 30, 2024",
+          days: "2 days",
+          purpose: "観光",
+          distance: 3002,
+          attractions: "The Venetian Macao, Cotai Strip, Taipa Village, Studio City, House of Dancing Water",
+          marqueePhoto: "albums/taipa/IMG_1906.jpg",
+          album: [
+            "albums/taipa/IMG_1906.jpg",
+            "albums/taipa/IMG_1907.mov",
+            "albums/taipa/IMG_1953.mov"
+          ]
+        }
+      ]
+    },
+    {
+      id: "vietnam",
+      nameJa: "ベトナム", nameEn: "Vietnam",
+      flag: "vn",
+      period: "May – Jun 2024",
+      cities: [
+        {
+          id: "danang",
+          nameJa: "ダナン", nameEn: "Da Nang",
+          photo: "danang-900.jpg",
+          period: "May 30 – Jun 5, 2024",
+          days: "7 days",
+          purpose: "ビーチリゾート",
+          distance: 3866,
+          attractions: "My Khe Beach, Marble Mountains, Dragon Bridge, Ba Na Hills, Linh Ung Pagoda",
+          marqueePhoto: "albums/danang/IMG_2316.jpg",
+          album: [
+            "albums/danang/C7C1593C-E2D2-49A3-ABDB-D1F9FF03FED7.jpg",
+            "albums/danang/FF99A6A1-FEE6-45F3-8BD6-F99F7887D9F7.jpg",
+            "albums/danang/IMG_2017.jpg",
+            "albums/danang/IMG_2027.jpg",
+            "albums/danang/IMG_2098.jpg",
+            "albums/danang/IMG_2103.jpg",
+            "albums/danang/IMG_2121.jpg",
+            "albums/danang/IMG_2181.jpg",
+            "albums/danang/IMG_2182.mov",
+            "albums/danang/IMG_2218.jpg",
+            "albums/danang/IMG_2233.jpg",
+            "albums/danang/IMG_2300.jpg",
+            "albums/danang/IMG_2308.jpg",
+            "albums/danang/IMG_2316.jpg",
+            "albums/danang/IMG_2323.jpg",
+            "albums/danang/IMG_2375.jpg",
+            "albums/danang/IMG_2536.jpg",
+            "albums/danang/IMG_2576.jpg"
+          ]
+        },
+        {
+          id: "hoian",
+          nameJa: "ホイアン", nameEn: "Hoi An",
+          photo: "pexels-son-tung-tran-17375059-6558641-900.jpg",
+          period: "Jun 3 – 4, 2024",
+          days: "2 days",
+          purpose: "観光",
+          distance: 3867,
+          attractions: "Hoi An Ancient Town, Japanese Covered Bridge, An Bang Beach, Tan Ky House, Lantern Festival",
+          marqueePhoto: "albums/hoian/0F869C1A-AEDD-4E13-BA5A-259F75C8ADF7.jpg",
+          album: [
+            "albums/hoian/0F869C1A-AEDD-4E13-BA5A-259F75C8ADF7.jpg",
+            "albums/hoian/21B9B548-2F5E-4C0A-B07B-6D66406D563A.jpg",
+            "albums/hoian/2CDC0554-E2DA-4BD7-81F1-5688D2704581.jpg",
+            "albums/hoian/6541E2EE-A5E1-4E25-80AA-815020CB7A60.jpg",
+            "albums/hoian/C0F41114-BABB-4109-BE31-7F98E2570F78.jpg",
+            "albums/hoian/C307A82F-6653-462D-930E-D09E5699CE18.jpg",
+            "albums/hoian/IMG_2491.jpg",
+            "albums/hoian/IMG_2493.jpg",
+            "albums/hoian/IMG_2510.jpg",
+            "albums/hoian/IMG_2511.jpg",
+            "albums/hoian/IMG_2516.jpg",
+            "albums/hoian/IMG_2520.jpg",
+            "albums/hoian/IMG_2524.jpg",
+            "albums/hoian/IMG_2527.jpg",
+            "albums/hoian/IMG_2531.mov"
+          ]
+        }
+      ]
+    },
+    {
+      id: "italy",
+      nameJa: "イタリア", nameEn: "Italy",
+      flag: "it",
+      period: "Dec 2024",
+      cities: [
+        {
+          id: "rome",
+          nameJa: "ローマ", nameEn: "Rome",
+          photo: "https://images.unsplash.com/photo-1525874684015-58379d421a52?w=900",
+          period: "Dec 3 – 6, 2024",
+          days: "4 days",
+          purpose: "観光・歴史巡り",
+          distance: 9883,
+          attractions: "Colosseum, Vatican City, Trevi Fountain, Pantheon, Spanish Steps",
+          marqueePhoto: "albums/rome/IMG_4041.jpg",
+          album: [
+            "albums/rome/FEEB7A7A-3B31-429B-82E5-5424031D2018.JPG",
+            "albums/rome/IMG_3940.jpg",
+            "albums/rome/IMG_3971.jpg",
+            "albums/rome/IMG_3987.jpg",
+            "albums/rome/IMG_4016.jpg",
+            "albums/rome/IMG_4024.jpg",
+            "albums/rome/IMG_4041.jpg",
+            "albums/rome/IMG_4042.mov",
+            "albums/rome/IMG_4048.jpg",
+            "albums/rome/IMG_4049.mov",
+            "albums/rome/IMG_4074.jpg",
+            "albums/rome/IMG_4080.jpg",
+            "albums/rome/IMG_4081.mov",
+            "albums/rome/IMG_4083.jpg",
+            "albums/rome/IMG_4085.jpg",
+            "albums/rome/IMG_4088.jpg",
+            "albums/rome/IMG_4098.mov",
+            "albums/rome/IMG_4101.mov",
+            "albums/rome/clip-extra.mp4"
+          ]
+        },
+        {
+          id: "fiumicino",
+          nameJa: "フィウミチーノ", nameEn: "Fiumicino",
+          photo: "https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=900",
+          period: "Dec 14 – 16, 2024",
+          days: "3 days",
+          purpose: "経由・観光",
+          distance: 9889,
+          attractions: "Fiumicino Lighthouse, Isola Sacra Necropolis, Fregene Beach, Trajan's Port, Ostia Antica",
+          marqueePhoto: "albums/fiumicino/photo-01.jpg",
+          album: [
+            "albums/fiumicino/clip-01.mov",
+            "albums/fiumicino/clip-02.mov",
+            "albums/fiumicino/clip-03.mov",
+            "albums/fiumicino/clip-04.mov",
+            "albums/fiumicino/clip-05.mov",
+            "albums/fiumicino/clip-06.mp4",
+            "albums/fiumicino/photo-01.jpg",
+            "albums/fiumicino/photo-02.jpg",
+            "albums/fiumicino/photo-03.jpg",
+            "albums/fiumicino/photo-04.jpg",
+            "albums/fiumicino/photo-05.jpg",
+            "albums/fiumicino/photo-06.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      id: "austria",
+      nameJa: "オーストリア", nameEn: "Austria",
+      flag: "at",
+      period: "Dec 2024",
+      cities: [
+        {
+          id: "vienna",
+          nameJa: "ウィーン", nameEn: "Vienna",
+          photo: "pexels-elijahjcobb-35599444-900.jpg",
+          period: "Dec 6 – 8, 2024",
+          days: "3 days",
+          purpose: "音楽・建築巡り",
+          distance: 9156,
+          attractions: "Schönbrunn Palace, St. Stephen's Cathedral, Belvedere Palace, Vienna State Opera, Prater Park",
+          marqueePhoto: "albums/vienna/IMG_4119.jpg",
+          album: [
+            "albums/vienna/IMG_4112.jpg",
+            "albums/vienna/IMG_4116.jpg",
+            "albums/vienna/IMG_4119.jpg",
+            "albums/vienna/IMG_4122.jpg",
+            "albums/vienna/IMG_4126.jpg",
+            "albums/vienna/IMG_4134.mov",
+            "albums/vienna/IMG_4136.mov",
+            "albums/vienna/IMG_4141.jpg",
+            "albums/vienna/IMG_4144.mov",
+            "albums/vienna/IMG_4145.mov",
+            "albums/vienna/IMG_4146.jpg",
+            "albums/vienna/IMG_4147.jpg",
+            "albums/vienna/IMG_4149.JPG",
+            "albums/vienna/IMG_4155.jpg",
+            "albums/vienna/IMG_4156.mov",
+            "albums/vienna/IMG_4161.jpg",
+            "albums/vienna/IMG_4164.jpg"
+          ]
+        },
+        {
+          id: "hallstatt",
+          nameJa: "ハルシュタット", nameEn: "Hallstatt",
+          photo: "pexels-emilia-1353434-19628651-900.jpg",
+          period: "Dec 8 – 9, 2024",
+          days: "2 days",
+          purpose: "観光・絶景",
+          distance: 9344,
+          attractions: "Hallstatt Lake, Salt Mine, Hallstatt Skywalk, Beinhaus Bone House, Five Fingers Viewpoint",
+          marqueePhoto: "albums/hallstatt/IMG_4179.jpg",
+          album: [
+            "albums/hallstatt/IMG_4179.jpg",
+            "albums/hallstatt/IMG_4187.jpg",
+            "albums/hallstatt/IMG_4192.mov",
+            "albums/hallstatt/IMG_4194.mov",
+            "albums/hallstatt/IMG_4205.jpg",
+            "albums/hallstatt/IMG_4217.mov",
+            "albums/hallstatt/IMG_4220.jpg",
+            "albums/hallstatt/IMG_4225.mov"
+          ]
+        },
+        {
+          id: "salzburg",
+          nameJa: "ザルツブルク", nameEn: "Salzburg",
+          photo: "pexels-alan-kabes-364775148-36500014-900.jpg",
+          period: "Dec 9 – 11, 2024",
+          days: "3 days",
+          purpose: "音楽・観光",
+          distance: 9353,
+          attractions: "Hohensalzburg Fortress, Mirabell Palace, Getreidegasse, Salzburg Cathedral, Hellbrunn Palace",
+          marqueePhoto: "albums/salzburg/photo-01.jpg",
+          album: [
+            "albums/salzburg/clip-01.mov",
+            "albums/salzburg/clip-02.mov",
+            "albums/salzburg/clip-03.mov",
+            "albums/salzburg/clip-04.mov",
+            "albums/salzburg/clip-05.mov",
+            "albums/salzburg/photo-01.jpg",
+            "albums/salzburg/photo-02.jpg",
+            "albums/salzburg/photo-03.jpg",
+            "albums/salzburg/photo-04.jpg",
+            "albums/salzburg/photo-05.jpg",
+            "albums/salzburg/photo-06.jpg",
+            "albums/salzburg/photo-07.jpg",
+            "albums/salzburg/photo-08.jpg",
+            "albums/salzburg/photo-09.jpg",
+            "albums/salzburg/photo-10.jpg",
+            "albums/salzburg/photo-11.jpg",
+            "albums/salzburg/photo-12.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      id: "czech",
+      nameJa: "チェコ", nameEn: "Czech Republic",
+      flag: "cz",
+      period: "Dec 2024",
+      cities: [
+        {
+          id: "prague",
+          nameJa: "プラハ", nameEn: "Prague",
+          photo: "https://images.unsplash.com/photo-1541849546-216549ae216d?w=900",
+          period: "Dec 11 – 14, 2024",
+          days: "4 days",
+          purpose: "観光・歴史巡り",
+          distance: 9096,
+          attractions: "Prague Castle, Charles Bridge, Old Town Square, Astronomical Clock, St. Vitus Cathedral",
+          marqueePhoto: "albums/prague/photo-01.jpg",
+          album: [
+            "albums/prague/clip-01.mov",
+            "albums/prague/clip-02.mov",
+            "albums/prague/clip-03.mov",
+            "albums/prague/clip-04.mov",
+            "albums/prague/clip-05.mov",
+            "albums/prague/clip-06.mov",
+            "albums/prague/photo-01.jpg",
+            "albums/prague/photo-02.jpg",
+            "albums/prague/photo-03.jpg",
+            "albums/prague/photo-04.jpg",
+            "albums/prague/photo-05.jpg",
+            "albums/prague/photo-06.jpg",
+            "albums/prague/photo-07.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      id: "indonesia",
+      nameJa: "インドネシア", nameEn: "Indonesia",
+      flag: "id",
+      period: "May 2026",
+      cities: [
+        {
+          id: "bali",
+          nameJa: "バリ島", nameEn: "Bali",
+          photo: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900",
+          period: "May 15 – 17, 2026",
+          days: "3 days",
+          purpose: "リゾート",
+          distance: 5577,
+          attractions: "Tegalalang Rice Terrace, Uluwatu Temple, Tanah Lot, Ubud Monkey Forest, Mount Batur",
+          marqueePhoto: "albums/bali/heic-01.jpg",
+          album: [
+            "albums/bali/clip-01.mov",
+            "albums/bali/heic-01.jpg",
+            "albums/bali/heic-02.jpg",
+            "albums/bali/heic-03.jpg",
+            "albums/bali/heic-04.jpg",
+            "albums/bali/heic-05.jpg",
+            "albums/bali/heic-06.jpg",
+            "albums/bali/heic-07.jpg",
+            "albums/bali/heic-08.jpg",
+            "albums/bali/heic-09.jpg",
+            "albums/bali/heic-10.jpg",
+            "albums/bali/jpg-01.jpg",
+            "albums/bali/jpg-02.jpg",
+            "albums/bali/jpg-03.jpg",
+            "albums/bali/jpg-04.jpg",
+            "albums/bali/jpg-05.jpg",
+            "albums/bali/jpg-06.jpg",
+            "albums/bali/jpg-07.jpg",
+            "albums/bali/jpg-08.jpg",
+            "albums/bali/jpg-09.jpg",
+            "albums/bali/jpg-10.jpg",
+            "albums/bali/jpg-11.jpg",
+            "albums/bali/jpg-12.jpg",
+            "albums/bali/jpg-13.jpg"
+          ]
+        }
+      ]
+    }
+  ];
+</script>
+<!-- ▲▲▲ 編集エリアここまで ▲▲▲ -->
+
+<style>
+  :root {
+    --bg: #fff7ec;
+    --ink: #1a1410;
+    --accent: #ff5a3c;
+    --accent2: #ffd166;
+    --accent3: #06a77d;
+    --paper: #fffaf2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(255, 90, 60, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(255, 209, 102, 0.12) 0%, transparent 50%);
+  }
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    padding: 1.2rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 247, 236, 0.7);
+    border-bottom: 1px solid rgba(26, 20, 16, 0.08);
+  }
+  .nav-logo {
+    font-family: 'Caveat', cursive; font-size: 1.8rem; color: var(--accent);
+    background: none; border: none; padding: 0; cursor: pointer;
+    transition: transform 0.25s, opacity 0.25s;
+  }
+
+  /* ============================================================
+     Side tab navigation (left rail)
+  ============================================================ */
+  .side-tabs {
+    position: fixed;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%) translateX(-24px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .side-tabs.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-50%) translateX(0);
+  }
+  .side-tab {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--paper);
+    color: var(--ink);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 0;
+    box-shadow: 0 4px 14px rgba(26, 20, 16, 0.10);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                background 0.25s, color 0.25s, box-shadow 0.25s;
+  }
+  .side-tab:hover {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translateX(4px) scale(1.04);
+    box-shadow: 0 8px 20px rgba(26, 20, 16, 0.22);
+  }
+  .side-tab:active { transform: translateX(4px) scale(0.97); }
+  .side-tab svg { width: 26px; height: 26px; display: block; }
+  .side-tab-label {
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    line-height: 1;
+  }
+  .side-tab:hover .side-tab-label { opacity: 1; }
+
+  @media (max-width: 768px) {
+    .side-tabs {
+      left: 0.6rem;
+      gap: 0.5rem;
+    }
+    .side-tab {
+      width: 46px; height: 46px;
+      border-radius: 13px;
+    }
+    .side-tab svg { width: 22px; height: 22px; }
+    .side-tab-label { display: none; }
+  }
+
+  /* ============================================================
+     Marquee stage (after city cards)
+  ============================================================ */
+  .m-stage {
+    position: relative;
+    height: 80vh; min-height: 600px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .m-headline {
+    position: absolute; z-index: 80;
+    top: clamp(40px, 8vh, 90px); left: 0; right: 0;
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(28px, 5vw, 64px);
+    line-height: 1; letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .m-bigtext {
+    position: absolute; z-index: 1;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 100%; text-align: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(100px, 22vw, 380px);
+    line-height: 0.76; letter-spacing: -0.05em;
+    color: rgba(26, 20, 16, 0.16);
+    text-transform: lowercase;
+    pointer-events: none; user-select: none;
+  }
+  .m-marquee {
+    position: absolute; z-index: 10;
+    top: 50%; left: 50%;
+    width: 150%;
+    height: 580px;
+    transform: translate(-50%, -50%) rotate(13deg);
+    -webkit-mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+            mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  }
+  .m-viewport { width: 100%; height: 100%; overflow: hidden; }
+  .m-track {
+    display: flex; gap: 60px; width: max-content; height: 100%;
+    align-items: center;
+    animation: marqueeScroll 60s linear infinite;
+  }
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .m-stack {
+    position: relative; flex: none;
+    width: 170px; height: 170px;
+  }
+  .m-back, .m-front {
+    position: absolute; inset: 0;
+    border-radius: 14px; overflow: hidden;
+    background-size: cover; background-position: center;
+  }
+  .m-back  { box-shadow: 0 12px 26px rgba(0,0,0,0.18); }
+  .m-front { box-shadow: 0 16px 34px rgba(0,0,0,0.24); }
+  .m-stack:nth-child(6n+1) { transform: translateY(-90px) rotate(-7deg); animation: mfl1 5.6s ease-in-out infinite; }
+  .m-stack:nth-child(6n+2) { transform: translateY(70px)  rotate(5deg);  animation: mfl2 6.3s ease-in-out infinite -1s; }
+  .m-stack:nth-child(6n+3) { transform: translateY(-40px) rotate(-3deg); animation: mfl3 5.1s ease-in-out infinite -2s; }
+  .m-stack:nth-child(6n+4) { transform: translateY(100px) rotate(8deg);  animation: mfl1 6.9s ease-in-out infinite -0.5s; }
+  .m-stack:nth-child(6n+5) { transform: translateY(-70px) rotate(-6deg); animation: mfl2 5.4s ease-in-out infinite -3s; }
+  .m-stack:nth-child(6n+6) { transform: translateY(50px)  rotate(4deg);  animation: mfl3 6.1s ease-in-out infinite -1.5s; }
+  @keyframes mfl1 { 0%,100%{transform:translateY(-90px) rotate(-7deg);} 50%{transform:translateY(-78px) rotate(-4deg);} }
+  @keyframes mfl2 { 0%,100%{transform:translateY(70px)  rotate(5deg); } 50%{transform:translateY(58px)  rotate(8deg);} }
+  @keyframes mfl3 { 0%,100%{transform:translateY(-40px) rotate(-3deg);} 50%{transform:translateY(-52px) rotate(-6deg);} }
+  .m-stack:nth-child(2n+1) .m-back { transform: translate(18px, -14px) rotate(6deg); }
+  .m-stack:nth-child(2n)   .m-back { transform: translate(-18px, 12px) rotate(-6deg); }
+  .m-flag {
+    position: absolute; top: 12px; left: 12px; z-index: 2;
+    width: 36px; height: 26px; border-radius: 5px;
+    object-fit: cover;
+    box-shadow: 0 3px 9px rgba(0,0,0,0.35);
+    border: 2px solid rgba(255,255,255,0.9);
+  }
+  .m-caption {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    padding: 28px 10px 10px;
+    color: #fff; font-weight: 700; font-size: 11.5px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  }
+  @media (max-width: 640px) {
+    .m-stage { height: 70vh; min-height: 500px; }
+    .m-stack { width: 130px; height: 130px; }
+    .m-track { gap: 40px; }
+    .m-stack:nth-child(6n+1) { transform: translateY(-55px) rotate(-7deg); }
+    .m-stack:nth-child(6n+4) { transform: translateY(60px) rotate(8deg); }
+  }
+
+  /* ============================================================
+     Album wall (landing stack → infinite drag canvas)
+  ============================================================ */
+  .aw-stage {
+    position: relative;
+    height: 100vh; min-height: 720px;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .aw-landing {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  .aw-landing.aw-leaving { opacity: 0; pointer-events: none; }
+  .aw-bg-text {
+    position: absolute;
+    left: -8px; bottom: 4vh;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(48px, 11vw, 170px);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    opacity: 0.92;
+    pointer-events: none; user-select: none;
+    z-index: 1;
+  }
+  .aw-stack {
+    position: relative;
+    width: 320px; height: 420px;
+    cursor: pointer;
+    z-index: 4;
+  }
+  .aw-stack .aw-photo {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    border-radius: 6px;
+    box-shadow: 0 24px 50px rgba(26, 20, 16, 0.32);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s;
+    transform-origin: center bottom;
+    backface-visibility: hidden;
+  }
+  .aw-stack-arrow {
+    position: absolute; top: 50%; left: 50%;
+    width: 96px; height: 96px; margin: -48px 0 0 -48px;
+    border-radius: 50%;
+    background: var(--ink); color: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: scale(0.6);
+    transition: opacity 0.35s, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 50; pointer-events: none;
+  }
+  .aw-stack:hover .aw-stack-arrow { opacity: 1; transform: scale(1); }
+
+  .aw-album {
+    position: absolute; inset: 0;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  .aw-album.aw-active { opacity: 1; pointer-events: auto; }
+  .aw-viewport {
+    position: absolute; inset: 0;
+    cursor: grab; touch-action: none;
+    overflow: hidden;
+  }
+  .aw-viewport.aw-grabbing { cursor: grabbing; }
+  .aw-card {
+    position: absolute; top: 0; left: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--paper);
+    box-shadow: 0 10px 28px rgba(26, 20, 16, 0.18);
+    will-change: transform;
+  }
+  .aw-card img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    pointer-events: none;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .aw-card:hover img { transform: scale(1.06); }
+  .aw-card .aw-overlay {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(26, 20, 16, 0.18);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .aw-card:hover .aw-overlay { opacity: 1; }
+  .aw-card .aw-arrow {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--ink); color: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    transform: scale(0.6) rotate(-30deg);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .aw-card:hover .aw-arrow { transform: scale(1) rotate(0); }
+  .aw-big-title-wrap {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 20; pointer-events: none;
+  }
+  .aw-big-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(110px, 20vw, 300px);
+    line-height: 0.9;
+    color: var(--ink);
+    letter-spacing: -0.04em;
+    opacity: 0.92;
+    mix-blend-mode: multiply;
+  }
+  .aw-scroll-hint {
+    position: absolute;
+    right: 40px; top: calc(50% + 90px);
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem;
+    color: var(--ink);
+    opacity: 0.55;
+    z-index: 25; pointer-events: none;
+  }
+  .aw-back-btn {
+    position: absolute; top: 22px; left: 28px; z-index: 40;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--paper); border: none;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    padding: 11px 18px;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(26, 20, 16, 0.15);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .aw-back-btn:hover {
+    transform: translateX(-3px);
+    box-shadow: 0 10px 22px rgba(26, 20, 16, 0.22);
+  }
+
+  @media (max-width: 768px) {
+    .aw-stage { min-height: 600px; }
+    .aw-stack { width: 240px; height: 320px; }
+    .aw-bg-text { font-size: clamp(40px, 14vw, 90px); }
+    .aw-scroll-hint { right: 20px; }
+  }
+  .nav-logo:hover { transform: translateY(-2px); opacity: 0.85; }
+  .nav-logo:active { transform: translateY(0); }
+  .nav-stats { display: flex; gap: 1.8rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; }
+  .nav-stats span b { color: var(--accent); font-size: 1.05rem; }
+  .fv { min-height: 100vh; padding: 8rem 2.5rem 4rem; position: relative; }
+  .fv-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
+  }
+  .fv-title .accent-word {
+    font-style: italic; color: var(--accent);
+    position: relative; display: inline-block;
+  }
+  .fv-title .accent-word::after {
+    content: ''; position: absolute;
+    bottom: 0.1em; left: -2%;
+    width: 104%; height: 0.15em;
+    background: var(--accent2);
+    z-index: -1; transform: rotate(-1deg);
+  }
+  .fv-subtitle {
+    font-family: 'Caveat', cursive;
+    font-size: 2rem; color: var(--ink);
+    margin-bottom: 3rem; opacity: 0.7;
+  }
+  .home-badge {
+    display: inline-flex; align-items: center;
+    gap: 0.8rem; padding: 0.6rem 1.2rem 0.6rem 0.6rem;
+    background: var(--ink); color: var(--bg);
+    border-radius: 999px; margin-bottom: 2rem;
+    cursor: pointer; border: none;
+    font-family: inherit; font-weight: 600; font-size: 0.95rem;
+    transition: transform 0.3s;
+  }
+  .home-badge:hover { transform: scale(1.05); }
+  .home-badge img {
+    width: 36px; height: 36px;
+    border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--bg);
+  }
+  .home-badge .pulse {
+    width: 8px; height: 8px;
+    background: var(--accent3);
+    border-radius: 50%; margin-left: 0.3rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+  /* FVに並べる国旗ストリップ */
+  .flag-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 2.5rem 0 1rem;
+    align-items: center;
+  }
+  .flag-strip-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-right: 0.5rem;
+  }
+  .flag-chip {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--paper);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: var(--paper);
+    opacity: 0;
+    animation: flagPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .flag-chip:hover {
+    transform: translateY(-6px) scale(1.15) rotate(-5deg);
+    z-index: 2;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  }
+  @keyframes flagPop {
+    from { opacity: 0; transform: translateY(20px) scale(0.5); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .slider-section {
+    position: relative;
+    margin: 0 -2.5rem;
+  }
+  .slider-wrap {
+    position: relative;
+    padding: 2rem 0;
+    mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
+  }
+  .slider {
+    display: flex; gap: 1.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    padding: 0 2.5rem 1rem;
+    scroll-behavior: auto;
+  }
+  .slider::-webkit-scrollbar { display: none; }
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    cursor: pointer;
+    z-index: 5;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 18px rgba(26, 20, 16, 0.2);
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem; font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+    padding: 0 0 0.15em;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s, color 0.25s;
+  }
+  .slider-btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translateY(-50%) scale(1.12);
+  }
+  .slider-btn:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+  .slider-btn--prev { left: 0.8rem; }
+  .slider-btn--next { right: 0.8rem; }
+  .card {
+    flex-shrink: 0; width: 280px; height: 400px;
+    border-radius: 1.5rem; overflow: hidden;
+    position: relative; cursor: pointer;
+    background: var(--paper);
+    box-shadow: 0 10px 30px rgba(26, 20, 16, 0.12);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s;
+    border: none; text-align: left; font-family: inherit;
+  }
+  .card:hover {
+    transform: translateY(-8px) rotate(-1deg);
+    box-shadow: 0 20px 50px rgba(26, 20, 16, 0.2);
+  }
+  .card-photo { width: 100%; height: 62%; object-fit: cover; display: block; }
+  .card-flag {
+    position: absolute; top: 1rem; right: 1rem;
+    width: 52px; height: 52px;
+    border-radius: 50%; object-fit: cover;
+    border: 3px solid var(--paper);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .card-number {
+    position: absolute; top: 1rem; left: 1rem;
+    background: var(--paper); color: var(--ink);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-weight: 700; font-size: 0.9rem;
+  }
+  .card-info { padding: 1.1rem 1.4rem; }
+  .card-city {
+    font-family: 'Fraunces', serif; font-weight: 700;
+    font-size: 1.35rem; margin-bottom: 0.15rem;
+    line-height: 1.1;
+  }
+  .card-country-label {
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.4rem;
+  }
+  .card-meta { font-size: 0.8rem; opacity: 0.6; font-weight: 600; }
+  .details {
+    padding: 6rem 2.5rem;
+    background: var(--paper);
+    border-top: 2px dashed rgba(26, 20, 16, 0.15);
+  }
+  .details-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900; letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+  .details-sub {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem; color: var(--accent);
+    margin-bottom: 4rem;
+  }
+  .home-section {
+    scroll-margin-top: 6rem; margin-bottom: 6rem;
+    padding: 3rem; border-radius: 2rem;
+    background: linear-gradient(135deg, var(--ink) 0%, #2d2520 100%);
+    color: var(--bg);
+    position: relative; overflow: hidden;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2.5rem; align-items: center;
+  }
+  .home-section::before {
+    content: '⌂ HOME BASE';
+    position: absolute; top: 1.5rem; right: 2rem;
+    font-size: 0.75rem; letter-spacing: 0.2em;
+    font-weight: 700; color: var(--accent2); opacity: 0.8;
+  }
+  .home-flag-wrap { position: relative; width: 160px; height: 160px; }
+  .home-flag-wrap img {
+    width: 100%; height: 100%;
+    border-radius: 50%; object-fit: cover;
+    border: 6px solid var(--accent2);
+  }
+  .home-flag-wrap::after {
+    content: ''; position: absolute; inset: -12px;
+    border: 2px dashed var(--accent2);
+    border-radius: 50%; opacity: 0.3;
+    animation: rotate 30s linear infinite;
+  }
+  @keyframes rotate { to { transform: rotate(360deg); } }
+  .home-content h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 3rem; font-weight: 900;
+    letter-spacing: -0.02em; line-height: 1;
+  }
+  .home-content .home-en {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem; color: var(--accent2);
+    margin-bottom: 1rem;
+  }
+  .home-content .home-memo {
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem; line-height: 1.4; opacity: 0.9;
+  }
+
+  /* 国セクションの見出し */
+  .country-block { margin-bottom: 5rem; }
+  .country-header {
+    display: flex; align-items: center;
+    gap: 1.2rem; margin-bottom: 1.8rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 3px solid var(--ink);
+    scroll-margin-top: 6rem;
+  }
+  .country-flag-mini {
+    width: 56px; height: 56px;
+    border-radius: 50%; object-fit: cover;
+    border: 3px solid var(--paper);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .country-header-text { flex: 1; }
+  .country-header-num {
+    font-family: 'Fraunces', serif;
+    font-size: 0.9rem; font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+  }
+  .country-header h3 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-top: 0.2rem;
+  }
+  .country-header-en {
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem; color: var(--accent);
+    opacity: 0.8;
+  }
+  .country-cities-count {
+    background: var(--ink); color: var(--bg);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  /* 都市カード（詳細） */
+  .detail-item {
+    scroll-margin-top: 6rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: center;
+    margin-bottom: 3rem; padding: 2rem;
+    border-radius: 2rem; background: var(--bg);
+    position: relative; overflow: hidden;
+  }
+  .detail-item::before {
+    content: attr(data-num);
+    position: absolute; top: -2rem; right: -1rem;
+    font-family: 'Fraunces', serif;
+    font-size: 12rem; font-weight: 900;
+    color: var(--accent); opacity: 0.08; line-height: 1;
+  }
+  .detail-item:nth-child(even) .detail-img-wrap { order: 2; }
+  .detail-img-wrap { position: relative; }
+  .detail-img {
+    width: 100%; aspect-ratio: 4 / 3;
+    object-fit: cover; border-radius: 1.5rem;
+    box-shadow: 0 15px 40px rgba(26, 20, 16, 0.15);
+  }
+  .detail-flag-big {
+    position: absolute; bottom: -1rem; left: -1rem;
+    width: 80px; height: 80px;
+    border-radius: 50%; object-fit: cover;
+    border: 5px solid var(--paper);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  .detail-content { position: relative; z-index: 1; }
+  .detail-city {
+    font-family: 'Fraunces', serif; font-weight: 900;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    letter-spacing: -0.02em; line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .detail-city-btn {
+    background: none; border: none; padding: 0;
+    cursor: pointer; color: inherit;
+    text-align: left;
+    display: inline-flex; align-items: baseline; gap: 0.5rem;
+    transition: color 0.25s, transform 0.25s;
+  }
+  .detail-city-btn:hover { color: var(--accent); transform: translateX(4px); }
+  .album-icon {
+    font-size: 0.4em;
+    opacity: 0.4;
+    transition: opacity 0.25s, transform 0.25s;
+  }
+  .detail-city-btn:hover .album-icon { opacity: 1; transform: rotate(-8deg) scale(1.15); }
+
+  /* Album modal */
+  .album-modal {
+    position: fixed; inset: 0;
+    background: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: none;
+    overflow: hidden;
+  }
+  .album-modal.active {
+    display: block;
+    animation: albumFadeIn 0.3s ease;
+  }
+  @keyframes albumFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .album-container {
+    position: relative;
+    width: 100%; height: 100%;
+  }
+  .album-photo {
+    position: absolute;
+    border-radius: 10px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.5);
+    opacity: 0;
+    object-fit: cover;
+    will-change: transform, opacity;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .album-photo[data-landed="1"] {
+    pointer-events: auto;
+    cursor: grab;
+  }
+  .album-photo[data-landed="1"].dragging {
+    cursor: grabbing;
+    box-shadow: 0 25px 65px rgba(0,0,0,0.75);
+  }
+  .album-photo.fall {
+    animation: photoFall 1.8s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+  }
+  @keyframes photoFall {
+    0% {
+      transform: translateY(-120vh) rotate(0deg) scale(0.85);
+      opacity: 0;
+    }
+    15% { opacity: 1; }
+    100% {
+      transform: translateY(var(--end-y, 0px)) rotate(var(--end-rot, 0deg)) scale(1);
+      opacity: 1;
+    }
+  }
+  .album-title {
+    position: fixed;
+    top: 1.5rem; left: 1.8rem;
+    color: white;
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem; font-weight: 700;
+    letter-spacing: -0.02em;
+    z-index: 1001;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+  .album-hint {
+    position: fixed;
+    bottom: 1.2rem; left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.6);
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    z-index: 1001;
+  }
+  .album-close {
+    position: fixed;
+    top: 1.2rem; right: 1.2rem;
+    background: white; color: var(--ink);
+    border: none;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    font-size: 1.6rem; font-weight: 700;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    transition: transform 0.2s;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+    padding: 0 0 0.1em;
+  }
+  .album-close:hover { transform: scale(1.12) rotate(90deg); }
+
+  /* ============================================================
+     Stacking city cards
+  ============================================================ */
+  .city-stack {
+    padding: 0 0 14vh;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .city-card {
+    position: sticky;
+    top: calc(90px + var(--i, 0) * 10px);
+    height: min(60vh, 520px);
+    border-radius: 28px;
+    padding: clamp(22px, 3vw, 38px);
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: clamp(16px, 2.5vw, 32px);
+    overflow: hidden;
+    box-shadow: 0 -10px 40px rgba(26, 20, 16, 0.15);
+    color: #fff;
+    transform-origin: center top;
+    scroll-margin-top: 80px;
+  }
+  .city-card:last-child { margin-bottom: 0; }
+
+  .city-card-text {
+    display: flex; flex-direction: column; height: 100%;
+    min-width: 0;
+  }
+  .city-card-header {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1.2rem;
+  }
+  .city-card-flag {
+    width: 40px; height: 40px;
+    border-radius: 50%; object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    flex: none;
+  }
+  .city-card-country {
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .city-card-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 900; font-size: 0.85rem;
+    letter-spacing: 0.18em; opacity: 0.6;
+    margin-left: auto;
+  }
+  .city-card-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    letter-spacing: -0.025em; line-height: 0.95;
+    margin: 0.2rem 0 1rem;
+    color: #fff;
+  }
+  .city-card-name.btn {
+    background: none; border: none; padding: 0; cursor: pointer;
+    text-align: left;
+    display: inline-flex; align-items: baseline; gap: 0.55rem;
+    transition: opacity 0.25s, transform 0.25s;
+  }
+  .city-card-name.btn:hover { opacity: 0.88; transform: translateX(4px); }
+  .city-card-name .album-icon {
+    font-size: 0.4em; opacity: 0.6;
+    transition: opacity 0.25s, transform 0.25s;
+  }
+  .city-card-name.btn:hover .album-icon { opacity: 1; transform: rotate(-8deg) scale(1.15); }
+
+  .city-card-rows {
+    margin-top: auto;
+    display: flex; flex-direction: column;
+  }
+  .city-card-row {
+    display: flex; gap: 0.9rem; align-items: baseline;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .city-card-row:last-child { border-bottom: none; }
+  .city-card-label {
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    opacity: 0.65;
+    min-width: 92px;
+    flex: none;
+  }
+  .city-card-value {
+    font-size: 0.95rem; font-weight: 600;
+    line-height: 1.45;
+    flex: 1;
+  }
+
+  .city-card-photo-wrap {
+    position: relative;
+    border-radius: 22px; overflow: hidden;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
+    min-height: 0;
+  }
+  .city-card-photo {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* 6色をローテーション */
+  .city-card.col-0 { background: linear-gradient(135deg, #c43a1f 0%, #ff6a3c 100%); }
+  .city-card.col-1 { background: linear-gradient(135deg, #1a4d6e 0%, #0e7c91 100%); }
+  .city-card.col-2 { background: linear-gradient(135deg, #1f6f4a 0%, #2f9d6a 100%); }
+  .city-card.col-3 { background: linear-gradient(135deg, #4a2d7a 0%, #7350b3 100%); }
+  .city-card.col-4 { background: linear-gradient(135deg, #a8722d 0%, #d9a04a 100%); }
+  .city-card.col-5 { background: linear-gradient(135deg, #1a1410 0%, #3d3530 100%); }
+
+  @media (max-width: 780px) {
+    .city-card {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      top: calc(72px + var(--i, 0) * 8px);
+      padding: 22px;
+    }
+    .city-card-photo-wrap {
+      aspect-ratio: 4 / 3;
+      order: -1;
+    }
+    .city-card-name { font-size: clamp(2rem, 9vw, 2.8rem); }
+  }
+  .detail-city-en {
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem; color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .detail-row {
+    display: flex; gap: 0.8rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px dashed rgba(26, 20, 16, 0.15);
+    align-items: baseline;
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-label {
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    opacity: 0.5; min-width: 90px;
+  }
+  .detail-value { font-size: 0.95rem; font-weight: 600; }
+  .detail-memo {
+    margin-top: 1.5rem; padding: 1rem;
+    background: rgba(255, 209, 102, 0.2);
+    border-radius: 0.8rem;
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem; line-height: 1.4;
+  }
+  .footer {
+    text-align: center; padding: 4rem 2rem;
+    font-family: 'Sacramento', 'Caveat', cursive;
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    transform: rotate(-3deg);
+    line-height: 1;
+  }
+  @media (max-width: 768px) {
+    .nav { padding: 1rem 1.2rem; flex-wrap: wrap; gap: 0.5rem; }
+    .nav-logo { font-size: 1.4rem; }
+    .nav-stats { gap: 0.9rem; font-size: 0.65rem; }
+    .nav-stats span b { font-size: 0.85rem; }
+    .fv { padding: 8rem 1.2rem 3rem; }
+    .slider-section { margin: 0 -1.2rem; }
+    .slider { padding: 0 1.2rem 1rem; }
+    .slider-btn { width: 40px; height: 40px; font-size: 1.3rem; }
+    .slider-btn--prev { left: 0.3rem; }
+    .slider-btn--next { right: 0.3rem; }
+    .details { padding: 4rem 1.2rem; }
+    .home-section {
+      grid-template-columns: 1fr;
+      text-align: center; padding: 2rem;
+    }
+    .home-flag-wrap { margin: 0 auto; width: 130px; height: 130px; }
+    .detail-item {
+      grid-template-columns: 1fr !important;
+      gap: 1.5rem; padding: 1.5rem;
+    }
+    .detail-item:nth-child(even) .detail-img-wrap { order: 0; }
+    .card { width: 240px; height: 360px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <button class="nav-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">My Travel Log ✈</button>
+  <div class="nav-stats" id="navStats"></div>
+</nav>
+
+<aside class="side-tabs" aria-label="ページ内ナビゲーション">
+  <button class="side-tab" data-tab="home" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Home">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.2 3 11.2v9.4a1.2 1.2 0 0 0 1.2 1.2H9v-6.6a1.2 1.2 0 0 1 1.2-1.2h3.6a1.2 1.2 0 0 1 1.2 1.2V21.8h4.8a1.2 1.2 0 0 0 1.2-1.2v-9.4z"/><circle cx="12" cy="11.6" r="1.4" fill="#fff"/></svg>
+    <span class="side-tab-label">Home</span>
+  </button>
+  <button class="side-tab" data-tab="log" onclick="document.getElementById('langkawi').scrollIntoView({behavior:'smooth', block:'start'})" aria-label="旅行ログ">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 3.5h10a1.5 1.5 0 0 1 1.5 1.5v15a.8.8 0 0 1-1.2.65L12 17.7l-5.3 2.95A.8.8 0 0 1 5.5 20V5A1.5 1.5 0 0 1 7 3.5zm.5 2v12.86l4-2.23 4.5 2.23V5.5h-8.5z"/></svg>
+    <span class="side-tab-label">Log</span>
+  </button>
+  <button class="side-tab" data-tab="album" onclick="document.getElementById('aw-stage').scrollIntoView({behavior:'smooth', block:'start'})" aria-label="アルバム">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 3.4 7.6 5.6H4.2A1.6 1.6 0 0 0 2.6 7.2v11.6a1.6 1.6 0 0 0 1.6 1.6h15.6a1.6 1.6 0 0 0 1.6-1.6V7.2a1.6 1.6 0 0 0-1.6-1.6h-3.4L15 3.4H9zm3 4.4a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm0 1.8a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6z"/></svg>
+    <span class="side-tab-label">Album</span>
+  </button>
+</aside>
+
+<section class="fv">
+  <button class="home-badge" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})">
+    <img id="homeBadgeFlag" alt="">
+    <span>Based in <b id="homeBadgeName"></b></span>
+    <span class="pulse"></span>
+  </button>
+
+  <h1 class="fv-title">
+    No common words,<br>
+    just common <span class="accent-word">warmth</span>.
+  </h1>
+  <div class="flag-strip" id="flagStrip">
+    <span class="flag-strip-label">Visited ✈</span>
+  </div>
+
+  <div class="slider-section">
+    <div class="slider-wrap">
+      <div class="slider" id="slider"></div>
+    </div>
+    <button class="slider-btn slider-btn--prev" id="sliderPrev" aria-label="前へ">‹</button>
+    <button class="slider-btn slider-btn--next" id="sliderNext" aria-label="次へ">›</button>
+  </div>
+</section>
+
+<section class="details">
+  <h2 class="details-title">The Journeys</h2>
+  <p class="details-sub">— Stories from each journey —</p>
+
+  <div class="home-section" id="home">
+    <div class="home-flag-wrap">
+      <img id="homeFlag" alt="">
+    </div>
+    <div class="home-content">
+      <h3 id="homeName"></h3>
+      <div class="home-en" id="homeEn"></div>
+      <div class="home-memo" id="homeMemo"></div>
+    </div>
+  </div>
+
+  <div id="detailsList"></div>
+</section>
+
+<section class="m-stage">
+  <h2 class="m-headline">Breathtaking views,</h2>
+  <div class="m-bigtext">around<br>the world</div>
+  <div class="m-marquee">
+    <div class="m-viewport">
+      <div class="m-track" id="marqueeTrack"></div>
+    </div>
+  </div>
+</section>
+
+<section class="aw-stage" id="aw-stage">
+  <div class="aw-landing" id="aw-landing">
+    <div class="aw-bg-text">
+      I'm jealous of<br>how free I<br>used to be.
+    </div>
+    <div class="aw-stack" id="aw-stack">
+      <div class="aw-stack-arrow" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </div>
+  <div class="aw-album" id="aw-album">
+    <div class="aw-viewport" id="aw-viewport"></div>
+    <button class="aw-back-btn" id="aw-backBtn" aria-label="Back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      BACK
+    </button>
+    <div class="aw-big-title-wrap"><div class="aw-big-title">Album</div></div>
+    <div class="aw-scroll-hint">scroll / drag</div>
+  </div>
+</section>
+
+<footer class="footer">
+  Keita Yamashita
+</footer>
+
+<div class="album-modal" id="albumModal" onclick="if(event.target===this) closeAlbum()">
+  <div class="album-title" id="albumTitle"></div>
+  <button class="album-close" onclick="closeAlbum()" aria-label="閉じる">×</button>
+  <div class="album-container" id="albumContainer"></div>
+  <div class="album-hint">click outside to close · press Esc</div>
+</div>
+
+<script>
+  // ===== 統計計算 =====
+  const allCities = TRIPS.flatMap(t => t.cities);
+  const totalCountries = TRIPS.length;
+  const totalCities = allCities.length;
+  const totalDays = allCities.reduce((sum, c) => {
+    const m = c.days.match(/\d+/);
+    return sum + (m ? parseInt(m[0]) : 0);
+  }, 0);
+  // 飛行距離 = 各都市の距離 × 2 (往復), マイル換算
+  const totalDistanceKm = allCities.reduce((sum, c) => sum + (c.distance || 0), 0) * 2;
+  const totalDistanceMi = Math.round(totalDistanceKm * 0.621371);
+  const distanceFmt = totalDistanceMi.toLocaleString();
+
+  document.getElementById('navStats').innerHTML =
+    '<span><b>' + totalCountries + '</b> 国</span>' +
+    '<span><b>' + totalCities + '</b> 都市</span>' +
+    '<span><b>' + totalDays + '</b> days</span>' +
+    '<span><b>' + distanceFmt + '</b> mi</span>';
+
+  // ===== 拠点 =====
+  document.getElementById('homeBadgeFlag').src = 'https://flagcdn.com/w160/' + HOME.flag + '.png';
+  document.getElementById('homeBadgeName').textContent = HOME.base;
+  document.getElementById('homeFlag').src = 'https://flagcdn.com/w320/' + HOME.flag + '.png';
+  document.getElementById('homeName').textContent = HOME.nameEn;
+  document.getElementById('homeEn').textContent = HOME.base;
+  document.getElementById('homeMemo').textContent = '"' + HOME.memo + '"';
+
+  // ===== FV国旗ストリップ =====
+  // 表示専用の追加フラグ（カード側には反映しない）
+  const EXTRA_FLAGS_AFTER = {
+    italy:   [{ flag: 'va', label: 'Vatican City' }],
+    austria: [{ flag: 'de', label: 'Germany' }]
+  };
+  const flagStrip = document.getElementById('flagStrip');
+  const flagList = [];
+  TRIPS.forEach(trip => {
+    flagList.push({ flag: trip.flag, label: trip.nameEn, targetId: trip.cities[0].id });
+    (EXTRA_FLAGS_AFTER[trip.id] || []).forEach(extra => {
+      flagList.push({ flag: extra.flag, label: extra.label, targetId: null });
+    });
+  });
+  flagList.forEach((item, i) => {
+    const img = document.createElement('img');
+    img.className = 'flag-chip';
+    img.src = 'https://flagcdn.com/w160/' + item.flag + '.png';
+    img.alt = item.label;
+    img.title = item.label;
+    img.style.animationDelay = (i * 0.08) + 's';
+    if (item.targetId) {
+      img.onclick = () => document.getElementById(item.targetId).scrollIntoView({behavior:'smooth'});
+    }
+    flagStrip.appendChild(img);
+  });
+
+  // ===== スライダー (都市カード) =====
+  const slider = document.getElementById('slider');
+  let cityIdx = 0;
+  const cardData = [];
+  TRIPS.forEach(trip => {
+    trip.cities.forEach(city => {
+      cityIdx++;
+      cardData.push({ trip, city, idx: cityIdx });
+    });
+  });
+
+  const makeCard = (d) =>
+    '<button class="card" onclick="document.getElementById(\'' + d.city.id + '\').scrollIntoView({behavior:\'smooth\'})">' +
+      '<span class="card-number">' + String(d.idx).padStart(2, '0') + '</span>' +
+      '<img class="card-photo" src="' + d.city.photo + '" alt="' + d.city.nameEn + '" loading="lazy">' +
+      '<img class="card-flag" src="https://flagcdn.com/w160/' + d.trip.flag + '.png" alt="' + d.trip.flag + '">' +
+      '<div class="card-info">' +
+        '<div class="card-country-label">' + d.trip.nameEn + '</div>' +
+        '<div class="card-city">' + d.city.nameEn + '</div>' +
+        '<div class="card-meta">' + d.city.period.split('–')[0].trim() + ' · ' + d.city.days + '</div>' +
+      '</div>' +
+    '</button>';
+
+  slider.innerHTML = cardData.map(makeCard).join('') + cardData.map(makeCard).join('');
+
+  // ===== スライダー自動スクロール + 手動操作 =====
+  let pausedUntil = 0;
+
+  function autoScrollTick() {
+    if (Date.now() > pausedUntil) {
+      slider.scrollLeft += 0.6;
+      const half = slider.scrollWidth / 2;
+      if (slider.scrollLeft >= half) {
+        slider.scrollLeft -= half;
+      }
+    }
+    requestAnimationFrame(autoScrollTick);
+  }
+  requestAnimationFrame(autoScrollTick);
+
+  slider.addEventListener('mouseenter', () => { pausedUntil = Infinity; });
+  slider.addEventListener('mouseleave', () => { pausedUntil = Date.now() + 1200; });
+  ['wheel', 'touchstart', 'pointerdown'].forEach(ev =>
+    slider.addEventListener(ev, () => { pausedUntil = Date.now() + 2500; }, { passive: true })
+  );
+
+  const stepWidth = () => {
+    const card = slider.querySelector('.card');
+    return card ? card.offsetWidth + 24 : 300;
+  };
+
+  document.getElementById('sliderPrev').addEventListener('click', () => {
+    pausedUntil = Date.now() + 3000;
+    let target = slider.scrollLeft - stepWidth();
+    if (target < 0) target += slider.scrollWidth / 2;
+    slider.scrollTo({ left: target, behavior: 'smooth' });
+  });
+  document.getElementById('sliderNext').addEventListener('click', () => {
+    pausedUntil = Date.now() + 3000;
+    slider.scrollBy({ left: stepWidth(), behavior: 'smooth' });
+  });
+
+  // ===== 詳細リスト: 都市カードをスタッキング表示 =====
+  let cityIdxStack = 0;
+  const allCityCardsHtml = TRIPS.flatMap(trip =>
+    trip.cities.map(city => {
+      cityIdxStack++;
+      const num = String(cityIdxStack).padStart(2, '0');
+      const i = cityIdxStack - 1;
+      const colorClass = 'col-' + (i % 6);
+      const nameEl = city.album
+        ? '<button class="city-card-name btn" onclick="openAlbum(\'' + city.id + '\')">' + city.nameEn + '<span class="album-icon">📷</span></button>'
+        : '<h3 class="city-card-name">' + city.nameEn + '</h3>';
+      return (
+        '<article class="city-card ' + colorClass + '" id="' + city.id + '" style="--i:' + i + '">' +
+          '<div class="city-card-text">' +
+            '<div class="city-card-header">' +
+              '<img class="city-card-flag" src="https://flagcdn.com/w160/' + trip.flag + '.png" alt="' + trip.flag + '">' +
+              '<span class="city-card-country">' + trip.nameEn + ' · ' + trip.period + '</span>' +
+              '<span class="city-card-num">(' + num + ')</span>' +
+            '</div>' +
+            nameEl +
+            '<div class="city-card-rows">' +
+              '<div class="city-card-row"><span class="city-card-label">Period</span><span class="city-card-value">' + city.period + '</span></div>' +
+              '<div class="city-card-row"><span class="city-card-label">Duration</span><span class="city-card-value">' + city.days + '</span></div>' +
+              '<div class="city-card-row"><span class="city-card-label">Distance</span><span class="city-card-value">' + Math.round(city.distance * 0.621371).toLocaleString() + ' mi</span></div>' +
+              '<div class="city-card-row"><span class="city-card-label">Attractions</span><span class="city-card-value">' + city.attractions + '</span></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="city-card-photo-wrap">' +
+            '<img class="city-card-photo" src="' + city.photo + '" alt="' + city.nameEn + '" loading="lazy">' +
+          '</div>' +
+        '</article>'
+      );
+    })
+  ).join('');
+
+  document.getElementById('detailsList').innerHTML = '<div class="city-stack">' + allCityCardsHtml + '</div>';
+
+  // ===== アルバムモーダル =====
+  const cityAlbums = {};
+  const cityNames = {};
+  TRIPS.forEach(t => t.cities.forEach(c => {
+    if (c.album) { cityAlbums[c.id] = c.album.filter(s => !/\.(mp4|mov|webm|m4v)$/i.test(s)); cityNames[c.id] = c.nameEn; }
+  }));
+
+  window.openAlbum = function(cityId) {
+    const album = cityAlbums[cityId];
+    if (!album) return;
+    const modal = document.getElementById('albumModal');
+    const container = document.getElementById('albumContainer');
+    const titleEl = document.getElementById('albumTitle');
+    container.innerHTML = '';
+    titleEl.textContent = cityNames[cityId] + ' — Album';
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    const aspects = [[4,3],[3,4],[1,1],[3,2],[2,3]];
+    album.forEach((src, i) => {
+      const isVideo = /\.(mp4|mov|webm|m4v)$/i.test(src);
+      const img = document.createElement(isVideo ? 'video' : 'img');
+      img.className = 'album-photo';
+      if (isVideo) {
+        img.muted = true;
+        img.loop = true;
+        img.autoplay = true;
+        img.playsInline = true;
+        img.setAttribute('muted', '');
+        img.setAttribute('loop', '');
+        img.setAttribute('autoplay', '');
+        img.setAttribute('playsinline', '');
+      }
+      img.src = src;
+      const [aw, ah] = aspects[Math.floor(Math.random() * aspects.length)];
+      const w = 180 + Math.random() * 140;
+      const h = w * ah / aw;
+      img.style.width = w + 'px';
+      img.style.height = h + 'px';
+      const startX = Math.random() * Math.max(20, vw - w - 20);
+      img.style.left = startX + 'px';
+      img.style.top = '0px';
+      const endY = 70 + Math.random() * Math.max(100, vh - h - 160);
+      const endRot = (Math.random() - 0.5) * 28;
+      img.style.setProperty('--end-y', endY + 'px');
+      img.style.setProperty('--end-rot', endRot + 'deg');
+      img.dataset.endY = endY;
+      img.dataset.endRot = endRot;
+      img.dataset.dx = '0';
+      img.dataset.dy = '0';
+      img.style.animationDelay = (i * 0.18) + 's';
+      container.appendChild(img);
+      img.addEventListener('animationend', () => {
+        const eY = parseFloat(img.dataset.endY);
+        const eR = parseFloat(img.dataset.endRot);
+        // インラインに最終状態を焼き付けてからアニメーションを外す（以降はインラインが制御）
+        img.style.transform = 'translateY(' + eY + 'px) rotate(' + eR + 'deg) scale(1)';
+        img.style.opacity = '1';
+        img.classList.remove('fall');
+        img.dataset.landed = '1';
+      }, { once: true });
+      requestAnimationFrame(() => img.classList.add('fall'));
+    });
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  // ドラッグで写真を動かす
+  let dragPhoto = null;
+  let dragOff = null;
+  let topZ = 10;
+  (function initAlbumDrag() {
+    const container = document.getElementById('albumContainer');
+    const start = (cx, cy, photo) => {
+      if (!photo || photo.dataset.landed !== '1') return false;
+      dragPhoto = photo;
+      const dx = parseFloat(photo.dataset.dx || '0');
+      const dy = parseFloat(photo.dataset.dy || '0');
+      const endY = parseFloat(photo.dataset.endY || '0');
+      const endRot = parseFloat(photo.dataset.endRot || '0');
+      dragOff = { mx: cx, my: cy, dx, dy, endY, endRot };
+      photo.style.zIndex = ++topZ;
+      photo.classList.add('dragging');
+      // Lock inline transform to current visual state (= animation's final keyframe)
+      photo.style.transform = 'translate(' + dx + 'px, ' + (endY + dy) + 'px) rotate(' + endRot + 'deg) scale(1)';
+      return true;
+    };
+    const move = (cx, cy) => {
+      if (!dragPhoto || !dragOff) return;
+      const ndx = dragOff.dx + (cx - dragOff.mx);
+      const ndy = dragOff.dy + (cy - dragOff.my);
+      dragPhoto.dataset.dx = ndx;
+      dragPhoto.dataset.dy = ndy;
+      dragPhoto.style.transform = 'translate(' + ndx + 'px, ' + (dragOff.endY + ndy) + 'px) rotate(' + dragOff.endRot + 'deg) scale(1)';
+    };
+    const end = () => {
+      if (dragPhoto) dragPhoto.classList.remove('dragging');
+      dragPhoto = null; dragOff = null;
+    };
+    container.addEventListener('mousedown', (e) => {
+      const photo = e.target.closest('.album-photo');
+      if (start(e.clientX, e.clientY, photo)) e.preventDefault();
+    });
+    document.addEventListener('mousemove', (e) => move(e.clientX, e.clientY));
+    document.addEventListener('mouseup', end);
+    container.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      const photo = e.target.closest('.album-photo');
+      if (start(t.clientX, t.clientY, photo)) e.preventDefault();
+    }, { passive: false });
+    document.addEventListener('touchmove', (e) => {
+      if (dragPhoto) { e.preventDefault(); move(e.touches[0].clientX, e.touches[0].clientY); }
+    }, { passive: false });
+    document.addEventListener('touchend', end);
+  })();
+
+  window.closeAlbum = function() {
+    document.getElementById('albumModal').classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeAlbum();
+  });
+
+  // FVを抜けたらサイドタブを表示
+  const sideTabsEl = document.querySelector('.side-tabs');
+  const fvEl = document.querySelector('.fv');
+  if (sideTabsEl && fvEl) {
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        sideTabsEl.classList.toggle('visible', !e.isIntersecting);
+      });
+    }, { threshold: 0.15 }).observe(fvEl);
+  }
+
+  // ===== マーキー（流れる写真帯）=====
+  const tiles = [];
+  TRIPS.forEach(trip => trip.cities.forEach(city => {
+    tiles.push({
+      photo: city.marqueePhoto || city.photo,
+      flag: trip.flag,
+      caption: city.nameEn + ', ' + trip.nameEn
+    });
+  }));
+  const renderTile = t =>
+    '<div class="m-stack">' +
+      '<div class="m-back" style="background-image:url(\'' + t.photo + '\')"></div>' +
+      '<div class="m-front" style="background-image:url(\'' + t.photo + '\')">' +
+        '<img class="m-flag" src="https://flagcdn.com/w80/' + t.flag + '.png" alt="">' +
+        '<div class="m-caption">' + t.caption + '</div>' +
+      '</div>' +
+    '</div>';
+  const tilesHtml = tiles.map(renderTile).join('');
+  const trackEl = document.getElementById('marqueeTrack');
+  if (trackEl) trackEl.innerHTML = tilesHtml + tilesHtml;
+
+  // ===== Album wall (landing stack + infinite drag canvas) =====
+  (function setupAlbumWall() {
+    // 全アルバムから写真だけ集める（動画は除外）
+    const AW_IMAGES = [];
+    TRIPS.forEach(trip => trip.cities.forEach(city => {
+      if (city.album) {
+        city.album.forEach(src => {
+          if (!/\.(mp4|mov|webm|m4v)$/i.test(src)) AW_IMAGES.push(src);
+        });
+      }
+    }));
+    // スタック用は marqueePhoto を最優先（人物無しの厳選ショット）
+    const AW_STACK = [];
+    TRIPS.forEach(trip => trip.cities.forEach(city => {
+      if (city.marqueePhoto) AW_STACK.push(city.marqueePhoto);
+    }));
+    while (AW_STACK.length < 5 && AW_IMAGES.length) AW_STACK.push(AW_IMAGES[AW_STACK.length]);
+    const STACK_IMGS = AW_STACK.slice(0, 5);
+
+    const stackEl = document.getElementById('aw-stack');
+    if (!stackEl) return;
+
+    // スタック画像を傾けて積む
+    const angles  = [-9, 6, -4, 8, 0];
+    const offsets = [{x:-26,y:14},{x:22,y:-10},{x:-14,y:-18},{x:16,y:12},{x:0,y:0}];
+    const stackPhotos = [];
+    STACK_IMGS.forEach((src, i) => {
+      const p = document.createElement('div');
+      p.className = 'aw-photo';
+      p.style.backgroundImage = 'url("' + src + '")';
+      const a = angles[i] ?? 0;
+      const o = offsets[i] ?? {x:0,y:0};
+      p.dataset.angle = a; p.dataset.ox = o.x; p.dataset.oy = o.y;
+      p.style.transform = 'translate(' + o.x + 'px,' + o.y + 'px) rotate(' + a + 'deg)';
+      p.style.zIndex = i + 1;
+      stackEl.insertBefore(p, stackEl.firstChild);
+      stackPhotos.push(p);
+    });
+    stackEl.addEventListener('pointerenter', () => {
+      stackPhotos.forEach(p => {
+        const a = parseFloat(p.dataset.angle), ox = parseFloat(p.dataset.ox), oy = parseFloat(p.dataset.oy);
+        p.style.transform = 'translate(' + (ox*1.5) + 'px,' + (oy*1.5) + 'px) rotate(' + (a*1.4) + 'deg) scale(1.02)';
+      });
+    });
+    stackEl.addEventListener('pointerleave', () => {
+      stackPhotos.forEach(p => {
+        const a = parseFloat(p.dataset.angle), ox = parseFloat(p.dataset.ox), oy = parseFloat(p.dataset.oy);
+        p.style.transform = 'translate(' + ox + 'px,' + oy + 'px) rotate(' + a + 'deg)';
+      });
+    });
+
+    // 遷移
+    const landing = document.getElementById('aw-landing');
+    const album   = document.getElementById('aw-album');
+    let entered = false;
+
+    function goToAlbum() {
+      if (entered) return;
+      entered = true;
+      stackPhotos.forEach(p => {
+        const a = parseFloat(p.dataset.angle);
+        p.style.transform = 'translate(0,0) rotate(' + a + 'deg) scale(1.25)';
+        p.style.opacity = '0';
+      });
+      landing.classList.add('aw-leaving');
+      setTimeout(() => { album.classList.add('aw-active'); startCanvas(); }, 450);
+    }
+    stackEl.addEventListener('click', goToAlbum);
+
+    function resetToLanding() {
+      entered = false;
+      album.classList.remove('aw-active');
+      landing.classList.remove('aw-leaving');
+      stackPhotos.forEach(p => {
+        const a = parseFloat(p.dataset.angle), ox = parseFloat(p.dataset.ox), oy = parseFloat(p.dataset.oy);
+        p.style.opacity = '1';
+        p.style.transform = 'translate(' + ox + 'px,' + oy + 'px) rotate(' + a + 'deg)';
+      });
+      // ドラッグ位置もリセット
+      offset = { x: 0, y: 0 };
+      velocity = { x: 0, y: 0 };
+    }
+    document.getElementById('aw-backBtn').addEventListener('click', resetToLanding);
+
+    // セクションがビューポートから外れたら必ず初期画面にリセット
+    const awStage = document.getElementById('aw-stage');
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting && entered) resetToLanding();
+      });
+    }, { threshold: 0 }).observe(awStage);
+
+    // 無限ドラッグキャンバス
+    const CARD_W = 320, CARD_H = 420, GAP_X = 100, GAP_Y = 100;
+    const CELL_W = CARD_W + GAP_X, CELL_H = CARD_H + GAP_Y;
+    const ARROW_SVG = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+
+    const vp = document.getElementById('aw-viewport');
+    let offset = {x:0, y:0}, velocity = {x:0, y:0}, dragging = false;
+    let last = {x:0, y:0};
+    let size = {w: window.innerWidth, h: window.innerHeight};
+    let running = false;
+    const pool = new Map();
+
+    function cellInfo(col, row) {
+      const len = AW_IMAGES.length;
+      const idx = (((col * 3 + row * 7) % len) + len) % len;
+      const yShift = ((Math.abs(col) % 2) * CELL_H) / 2;
+      return { src: AW_IMAGES[idx], yShift };
+    }
+
+    function render() {
+      if (!running) return;
+      if (!dragging) {
+        offset.x += velocity.x; offset.y += velocity.y;
+        velocity.x *= 0.93; velocity.y *= 0.93;
+        if (Math.abs(velocity.x) < 0.05) velocity.x = 0;
+        if (Math.abs(velocity.y) < 0.05) velocity.y = 0;
+      }
+      const ox = offset.x, oy = offset.y;
+      const sCol = Math.floor((-ox - CELL_W) / CELL_W);
+      const eCol = Math.ceil((-ox + size.w + CELL_W) / CELL_W);
+      const sRow = Math.floor((-oy - CELL_H) / CELL_H);
+      const eRow = Math.ceil((-oy + size.h + CELL_H) / CELL_H);
+      const need = new Set();
+      for (let c = sCol; c <= eCol; c++) {
+        for (let r = sRow; r <= eRow; r++) {
+          const key = c + '_' + r;
+          need.add(key);
+          const { src, yShift } = cellInfo(c, r);
+          const x = c * CELL_W + ox + GAP_X / 2;
+          const y = r * CELL_H + oy + yShift + GAP_Y / 2;
+          let el = pool.get(key);
+          if (!el) {
+            el = document.createElement('div');
+            el.className = 'aw-card';
+            el.style.width = CARD_W + 'px';
+            el.style.height = CARD_H + 'px';
+            el.innerHTML = '<img src="' + src + '" alt="" draggable="false">';
+            vp.appendChild(el);
+            pool.set(key, el);
+          }
+          el.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+        }
+      }
+      for (const [k, el] of pool) { if (!need.has(k)) { el.remove(); pool.delete(k); } }
+      requestAnimationFrame(render);
+    }
+
+    function startCanvas() {
+      if (running) return;
+      running = true;
+      // ビューポート計測（セクション基準）
+      const rect = vp.getBoundingClientRect();
+      size = { w: rect.width, h: rect.height };
+      requestAnimationFrame(render);
+    }
+
+    vp.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      vp.classList.add('aw-grabbing');
+      last = { x: e.clientX, y: e.clientY };
+      velocity = { x: 0, y: 0 };
+      try { vp.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    vp.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - last.x, dy = e.clientY - last.y;
+      offset.x += dx; offset.y += dy;
+      velocity = { x: dx, y: dy };
+      last = { x: e.clientX, y: e.clientY };
+    });
+    function endDrag(e) {
+      dragging = false;
+      vp.classList.remove('aw-grabbing');
+      try { vp.releasePointerCapture(e.pointerId); } catch (_) {}
+    }
+    vp.addEventListener('pointerup', endDrag);
+    vp.addEventListener('pointercancel', endDrag);
+    vp.addEventListener('wheel', (e) => {
+      // アルバム表示中のみキャプチャ
+      if (!document.getElementById('aw-album').classList.contains('aw-active')) return;
+      e.preventDefault();
+      velocity = { x: 0, y: 0 };
+      offset.x -= e.deltaX; offset.y -= e.deltaY;
+    }, { passive: false });
+
+    window.addEventListener('resize', () => {
+      const r = vp.getBoundingClientRect();
+      size = { w: r.width, h: r.height };
+    });
+  })();
+</script>
+
+</body>
+</html>
